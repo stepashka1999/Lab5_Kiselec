@@ -7,14 +7,12 @@ using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Emgu.CV.OCR;
 
+
 namespace Lab5
 {
-    class TextFinder
+    class TextFinder: IFinder
     {
         private string path = "D:\\Labs 3sem\\Prog\\Lab5\\Some Shit\\";
-        public VideoCapture capture { get; private set; }
-
-        public Image<Bgr, byte> SourseImage { get; private set; }
 
         public TextFinder(string FileName, int ch = 0)
         {
@@ -109,16 +107,6 @@ namespace Lab5
 
         }
 
-        public void SubImageGrabben(EventHandler someFunc)
-        {
-            capture.ImageGrabbed += someFunc;
-        }
-
-        public void UnSubImageGrabben(EventHandler someFunc)
-        {
-            capture.ImageGrabbed -= someFunc;
-        }
-
         public string CharacterRecognition(Image<Bgr, byte> img, int lang = 1)
         {
             Tesseract ocr;
@@ -134,24 +122,6 @@ namespace Lab5
 
             return txt;
         }
-
-        /*---Video---*/
-
-        public void CaptureStart()
-        {
-            capture.Start();
-        }
-
-        public void CapturePause()
-        {
-            capture.Pause();
-        }
-
-        public void CaptureStop()
-        {
-            capture.Stop();
-        }
-
 
     }
 }

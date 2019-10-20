@@ -4,8 +4,6 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using Emgu.CV.Face;
-using Emgu.CV.Util;
 
 namespace Lab5
 {
@@ -22,6 +20,7 @@ namespace Lab5
         TextFinder TxtFndr;
                 
         /*---Params---*/
+
         int func = 0; // | 0 - do nothing | 1 - Pictures with text from Video | 2 - Pictures with face from Video ( All ) | 3 - Pictures with face from Video ( One by One )
         bool ButPlay = false; // | true = play | false = pause
 
@@ -271,16 +270,6 @@ namespace Lab5
         {
             FaceFndr.ReadRecognition();
         }
-
-
-
-        /*---------------------------*/
-
-        /*--- Learning ---*/
-
-
-
-        /*----------------*/
 
     }
 }

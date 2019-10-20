@@ -2,24 +2,20 @@
 using Emgu.CV.Face;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
+
 
 namespace Lab5
 {
     
-    class FaceFinder
+    class FaceFinder: IFinder
     {
         private string path = "D:\\Labs 3sem\\Prog\\Lab5\\Some Shit\\haarcascade_frontalface_default.xml";
 
         private CascadeClassifier cc;
 
         FaceRecognizer faceRecognizer = new EigenFaceRecognizer(80, double.PositiveInfinity); // Object for face recognizion
-
-
-        public Image<Bgr, byte> SourseImage { get; private set; }
-        public VideoCapture capture { get; private set; }
 
         public FaceFinder(string FileName, int ch = 0)
         {
@@ -70,20 +66,6 @@ namespace Lab5
             return faceDetected;
         }
 
-        public void CaptureStart()
-        {
-            capture.Start();
-        }
-
-        public void CapturePause()
-        {
-            capture.Pause();
-        }
-
-        public void CaptureStop()
-        {
-            capture.Stop();
-        }
 
         /*--- List Of Faces ---*/
         public List<Image<Bgr,byte>> ListOfFace(Image<Bgr,byte> img)
@@ -104,23 +86,6 @@ namespace Lab5
             }
 
             return listOfFace;
-        }
-
-
-        private void FaceRecognizion(int count)
-        {
-            VectorOfInt markers = new VectorOfInt();
-            VectorOfMat faceImages = new VectorOfMat();
-
-            faceRecognizer.Train(faceImages, markers); // тренировка
-
-            faceRecognizer.Write("Tmp.YML"); // Запись в файл
-
-            faceRecognizer.Read("Tmp.YML"); // Чтение из файла
-
-            Image<Bgr, byte> sourseImage = new Image<Bgr, byte>( faceImages[0].Bitmap );
-            var result = faceRecognizer.Predict(sourseImage);// Попытка установить идентификатор лица
-
         }
 
         public void Train(List<Image<Bgr,byte>> listOfFaces)
@@ -158,17 +123,6 @@ namespace Lab5
             return faceRecognizer.Predict(grayImage.Resize(80, 80, Emgu.CV.CvEnum.Inter.Linear)).Label.ToString();
         }
 
-        /*--- Sub / Unsub ---*/
-        public void SubImageGrabben(EventHandler someFunc)
-        {
-            capture.ImageGrabbed += someFunc;
-        }
-
-        public void UnSubImageGrabben(EventHandler someFunc)
-        {
-            capture.ImageGrabbed -= someFunc;
-        }
-        /*--------------------*/
 
     }
 }
