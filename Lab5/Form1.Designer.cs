@@ -39,8 +39,14 @@
             this.loadImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.rIOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rIOToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rIOFaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imagesWithWordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.picturesWithFaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videoRIOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.videoRIOFaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.someShitFuncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readFacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Threshold_Bar = new System.Windows.Forms.TrackBar();
             this.Threshold_lbl = new System.Windows.Forms.Label();
             this.Iteration_lbl = new System.Windows.Forms.Label();
@@ -50,9 +56,6 @@
             this.TextOfPicture_lbl = new System.Windows.Forms.Label();
             this.Lang_cb = new System.Windows.Forms.CheckBox();
             this.Play_Buton = new System.Windows.Forms.Button();
-            this.videoRIOFaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.picturesWithFaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rIOFaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.FirstImage_Box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SecondImage_Box)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -101,7 +104,8 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadImageToolStripMenuItem,
-            this.rIOToolStripMenuItem});
+            this.rIOToolStripMenuItem,
+            this.someShitFuncToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(759, 24);
@@ -147,23 +151,66 @@
             // rIOToolStripMenuItem1
             // 
             this.rIOToolStripMenuItem1.Name = "rIOToolStripMenuItem1";
-            this.rIOToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.rIOToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
             this.rIOToolStripMenuItem1.Text = "RIO Text";
             this.rIOToolStripMenuItem1.Click += new System.EventHandler(this.RIOToolStripMenuItem1_Click);
+            // 
+            // rIOFaceToolStripMenuItem
+            // 
+            this.rIOFaceToolStripMenuItem.Name = "rIOFaceToolStripMenuItem";
+            this.rIOFaceToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.rIOFaceToolStripMenuItem.Text = "RIO Face";
+            this.rIOFaceToolStripMenuItem.Click += new System.EventHandler(this.rIOFaceToolStripMenuItem_Click);
             // 
             // imagesWithWordsToolStripMenuItem
             // 
             this.imagesWithWordsToolStripMenuItem.Name = "imagesWithWordsToolStripMenuItem";
-            this.imagesWithWordsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.imagesWithWordsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.imagesWithWordsToolStripMenuItem.Text = "Pictures with words";
             this.imagesWithWordsToolStripMenuItem.Click += new System.EventHandler(this.ImagesWithWordsToolStripMenuItem_Click);
+            // 
+            // picturesWithFaceToolStripMenuItem
+            // 
+            this.picturesWithFaceToolStripMenuItem.Name = "picturesWithFaceToolStripMenuItem";
+            this.picturesWithFaceToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.picturesWithFaceToolStripMenuItem.Text = "Pictures with face";
             // 
             // videoRIOToolStripMenuItem
             // 
             this.videoRIOToolStripMenuItem.Name = "videoRIOToolStripMenuItem";
-            this.videoRIOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.videoRIOToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.videoRIOToolStripMenuItem.Text = "Video RIO(Text)";
             this.videoRIOToolStripMenuItem.Click += new System.EventHandler(this.VideoRIOToolStripMenuItem_Click);
+            // 
+            // videoRIOFaceToolStripMenuItem
+            // 
+            this.videoRIOFaceToolStripMenuItem.Name = "videoRIOFaceToolStripMenuItem";
+            this.videoRIOFaceToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.videoRIOFaceToolStripMenuItem.Text = "Video RIO(Face)";
+            this.videoRIOFaceToolStripMenuItem.Click += new System.EventHandler(this.videoRIOFaceToolStripMenuItem_Click);
+            // 
+            // someShitFuncToolStripMenuItem
+            // 
+            this.someShitFuncToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trainToolStripMenuItem,
+            this.readFacesToolStripMenuItem});
+            this.someShitFuncToolStripMenuItem.Name = "someShitFuncToolStripMenuItem";
+            this.someShitFuncToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.someShitFuncToolStripMenuItem.Text = "Some Shit Func";
+            // 
+            // trainToolStripMenuItem
+            // 
+            this.trainToolStripMenuItem.Name = "trainToolStripMenuItem";
+            this.trainToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.trainToolStripMenuItem.Text = "Train";
+            this.trainToolStripMenuItem.Click += new System.EventHandler(this.trainToolStripMenuItem_Click);
+            // 
+            // readFacesToolStripMenuItem
+            // 
+            this.readFacesToolStripMenuItem.Name = "readFacesToolStripMenuItem";
+            this.readFacesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.readFacesToolStripMenuItem.Text = "Read Faces";
+            this.readFacesToolStripMenuItem.Click += new System.EventHandler(this.readFacesToolStripMenuItem_Click);
             // 
             // Threshold_Bar
             // 
@@ -262,26 +309,6 @@
             this.Play_Buton.Visible = false;
             this.Play_Buton.Click += new System.EventHandler(this.Play_Buton_Click);
             // 
-            // videoRIOFaceToolStripMenuItem
-            // 
-            this.videoRIOFaceToolStripMenuItem.Name = "videoRIOFaceToolStripMenuItem";
-            this.videoRIOFaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.videoRIOFaceToolStripMenuItem.Text = "Video RIO(Face)";
-            this.videoRIOFaceToolStripMenuItem.Click += new System.EventHandler(this.videoRIOFaceToolStripMenuItem_Click);
-            // 
-            // picturesWithFaceToolStripMenuItem
-            // 
-            this.picturesWithFaceToolStripMenuItem.Name = "picturesWithFaceToolStripMenuItem";
-            this.picturesWithFaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.picturesWithFaceToolStripMenuItem.Text = "Pictures with face";
-            // 
-            // rIOFaceToolStripMenuItem
-            // 
-            this.rIOFaceToolStripMenuItem.Name = "rIOFaceToolStripMenuItem";
-            this.rIOFaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.rIOFaceToolStripMenuItem.Text = "RIO Face";
-            this.rIOFaceToolStripMenuItem.Click += new System.EventHandler(this.rIOFaceToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -341,6 +368,9 @@
         private System.Windows.Forms.ToolStripMenuItem videoRIOFaceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem picturesWithFaceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rIOFaceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem someShitFuncToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trainToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readFacesToolStripMenuItem;
     }
 }
 

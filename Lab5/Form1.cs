@@ -5,6 +5,7 @@ using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Face;
+using Emgu.CV.Util;
 
 namespace Lab5
 {
@@ -19,7 +20,7 @@ namespace Lab5
 
         FaceFinder FaceFndr;
         TextFinder TxtFndr;
-
+                
         /*---Params---*/
         int func = 0; // | 0 - do nothing | 1 - Pictures with text from Video | 2 - Pictures with face from Video ( All ) | 3 - Pictures with face from Video ( One by One )
         bool ButPlay = false; // | true = play | false = pause
@@ -105,6 +106,7 @@ namespace Lab5
                 var img = frame.ToImage<Bgr, byte>();
 
                 image = TxtFndr.GetListOfImageOfROI(Threshold_Bar.Value, Iteration_Bar.Value, img)[Pictures_cb.SelectedIndex];
+
             }
             else
             {
@@ -112,19 +114,25 @@ namespace Lab5
 
                 FaceFndr.capture.Retrieve(frame);
 
-                image = FaceFndr.ListOfFace(frame.ToImage<Bgr, byte>())[Pictures_cb.SelectedIndex];
+                image = FaceFndr.ListOfFace(frame.ToImage<Bgr, byte>().Copy())[Pictures_cb.SelectedIndex];
+
+                TextOfPicture_lbl.Text = $"Text: {FaceFndr.FacePredict(image)}";
             }
             SecondImage_Box.Image = image;
 
-            var val = 0;
+            if (func < 2)
+            {
+                var val = 0;
 
-            if (Lang_cb.Checked) val = 1;
-            else val = 0;
+                if (Lang_cb.Checked) val = 1;
+                else val = 0;
 
-            TextOfPicture_lbl.Text = $"Text: {TxtFndr.CharacterRecognition(image,val)}";
+                TextOfPicture_lbl.Text = $"Text: {TxtFndr.CharacterRecognition(image, val)}";
+            }
+
         }
 
-        
+
         /*------------VIDEO------------*/
         private void LoadVideoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -248,8 +256,31 @@ namespace Lab5
             SecondImage_Box.Image = FaceFndr.DetectFace().Resize(SecondImage_Box.Width, SecondImage_Box.Height, Inter.Linear);
         }
 
+        private void trainToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Mat frame = new Mat();
+
+            FaceFndr.capture.Retrieve(frame);
+
+            var listOfFaces = FaceFndr.ListOfFace(frame.ToImage<Bgr, byte>().Copy());
+
+            FaceFndr.Train(listOfFaces);
+        }
+
+        private void readFacesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FaceFndr.ReadRecognition();
+        }
+
 
 
         /*---------------------------*/
+
+        /*--- Learning ---*/
+
+
+
+        /*----------------*/
+
     }
 }
