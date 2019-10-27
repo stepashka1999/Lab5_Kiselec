@@ -11,7 +11,7 @@ namespace Lab5
     
     class FaceFinder: IFinder
     {
-        private string path = "D:\\Labs 3sem\\Prog\\Lab5\\Some Shit\\haarcascade_frontalface_default.xml";
+        private string path = "D:\\Some Shit\\haarcascade_frontalface_default.xml";
 
         private CascadeClassifier cc;
 
@@ -39,7 +39,7 @@ namespace Lab5
                 img = frameImage;
             }
 
-            var faceDetected = GetArrayOfFace(ch, frameImage);
+            var faceDetected = GetArrayOfFace(ch, img);
 
             foreach (Rectangle face in faceDetected)
                 img.Draw(face, new Bgr(Color.GreenYellow), 2);
@@ -88,7 +88,7 @@ namespace Lab5
             return listOfFace;
         }
 
-        public void Train(List<Image<Bgr,byte>> listOfFaces)
+        public void Train(List<List<Image<Bgr,byte>>> listOfFaces)
         {
             VectorOfInt markers = new VectorOfInt();
                     
@@ -98,14 +98,17 @@ namespace Lab5
           
             for(int i = 0; i < listOfFaces.Count; i++)
             {
-                mrkrs[i] = i;
-                images.Push(listOfFaces[i].Resize(80,80,Emgu.CV.CvEnum.Inter.Linear));
+                foreach(List<Image<Bgr,byte>> list in listOfFaces)
+                {
+                    images.Push(list[i].Resize(80,80,Emgu.CV.CvEnum.Inter.Linear));
+                    mrkrs[i] = i+1;
+                }
+
+                markers.Push(mrkrs);
             }
 
-            markers.Push(mrkrs);
-
-
             faceRecognizer.Train(images, markers);
+
             faceRecognizer.Write("Tmp.YAML");
 
         }
@@ -115,12 +118,12 @@ namespace Lab5
             faceRecognizer.Read("Tmp.YAML");
         }
 
-        public string FacePredict(Image<Bgr,byte> img)
+        public int FacePredict(Image<Bgr,byte> img)
         {
             var copy = img.Copy();
             
             var grayImage = copy.Convert<Gray, byte>();
-            return faceRecognizer.Predict(grayImage.Resize(80, 80, Emgu.CV.CvEnum.Inter.Linear)).Label.ToString();
+            return faceRecognizer.Predict(grayImage.Resize(80, 80, Emgu.CV.CvEnum.Inter.Linear)).Label;
         }
 
 

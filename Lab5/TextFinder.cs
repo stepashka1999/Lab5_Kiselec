@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
@@ -12,7 +11,7 @@ namespace Lab5
 {
     class TextFinder: IFinder
     {
-        private string path = "D:\\Labs 3sem\\Prog\\Lab5\\Some Shit\\";
+        private string path = "D:\\Some Shit\\";
 
         public TextFinder(string FileName, int ch = 0)
         {
