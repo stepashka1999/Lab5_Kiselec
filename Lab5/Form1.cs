@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using Emgu.CV.Util;
 
 namespace Lab5
 {
@@ -14,15 +15,22 @@ namespace Lab5
             InitializeComponent();
         }
 
-        /*---Initialization---*/
+        /*--- Initialization ---*/
 
         FaceFinder FaceFndr;
         TextFinder TxtFndr;
+
+        /*--- Vectors for training ---*/
+        VectorOfMat Faces = new VectorOfMat();
+        VectorOfInt IndexOfFaces = new VectorOfInt();
+        Mat TempMat; // for image from combo box
                 
-        /*---Params---*/
+        /*--- Params ---*/
 
         int func = 0; // | 0 - do nothing | 1 - Pictures with text from Video | 2 - Pictures with face from Video ( All ) | 3 - Pictures with face from Video ( One by One )
         bool ButPlay = false; // | true = play | false = pause
+        bool Predict = false; // | true = predict | false = not predicting
+
 
         private void loadImageToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -115,7 +123,11 @@ namespace Lab5
 
                 image = FaceFndr.ListOfFace(frame.ToImage<Bgr, byte>().Copy())[Pictures_cb.SelectedIndex];
 
-                TextOfPicture_lbl.Text = $"Text: {FaceFndr.FacePredict(image)}";
+                var grayImage = image.Copy().Convert<Gray, byte>();
+                
+                TempMat = grayImage.Resize(80, 80, Inter.Linear).Mat; // Mat for Vector of Faces 
+
+                if(Predict)TextOfPicture_lbl.Text = $"Text: {FaceFndr.FacePredict(image)}";
             }
             SecondImage_Box.Image = image;
 
@@ -255,21 +267,40 @@ namespace Lab5
             SecondImage_Box.Image = FaceFndr.DetectFace().Resize(SecondImage_Box.Width, SecondImage_Box.Height, Inter.Linear);
         }
 
-        private void trainToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Mat frame = new Mat();
-
-            FaceFndr.capture.Retrieve(frame);
-
-            var listOfFaces = FaceFndr.ListOfFace(frame.ToImage<Bgr, byte>().Copy());
-
-            FaceFndr.Train(listOfFaces);
-        }
-
         private void readFacesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FaceFndr.ReadRecognition();
         }
 
+        private void openCloseAddInterfaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Add_button.Visible = !Add_button.Visible;
+            FaceIndex_tb.Visible = !FaceIndex_tb.Visible;
+            FaceIndex_lb.Visible = !FaceIndex_lb.Visible;
+            ClearAll_button.Visible = !ClearAll_button.Visible;
+        }
+
+        private void trainToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FaceFndr.Train(Faces, IndexOfFaces);
+        }
+
+        private void Add_button_Click(object sender, EventArgs e)
+        {
+            Faces.Push(TempMat);
+            var arr = new int[] { Convert.ToInt32(FaceIndex_tb.Text) };
+            IndexOfFaces.Push(arr);
+        }
+
+        private void predictToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Predict = !Predict;
+        }
+
+        private void ClearAll_button_Click(object sender, EventArgs e)
+        {
+            Faces.Clear();
+            IndexOfFaces.Clear();
+        }
     }
 }

@@ -88,29 +88,11 @@ namespace Lab5
             return listOfFace;
         }
 
-        public void Train(List<List<Image<Bgr,byte>>> listOfFaces)
-        {
-            VectorOfInt markers = new VectorOfInt();
-                    
-            int[] mrkrs = new int[listOfFaces.Count];
-
-            VectorOfMat images = new VectorOfMat();
-          
-            for(int i = 0; i < listOfFaces.Count; i++)
-            {
-                foreach(List<Image<Bgr,byte>> list in listOfFaces)
-                {
-                    images.Push(list[i].Resize(80,80,Emgu.CV.CvEnum.Inter.Linear));
-                    mrkrs[i] = i+1;
-                }
-
-                markers.Push(mrkrs);
-            }
-
-            faceRecognizer.Train(images, markers);
+        public void Train(VectorOfMat faces, VectorOfInt facesIndex)
+        {       
+            faceRecognizer.Train(faces, facesIndex);
 
             faceRecognizer.Write("Tmp.YAML");
-
         }
 
         public void ReadRecognition()
@@ -122,10 +104,9 @@ namespace Lab5
         {
             var copy = img.Copy();
             
-            var grayImage = copy.Convert<Gray, byte>();
-            return faceRecognizer.Predict(grayImage.Resize(80, 80, Emgu.CV.CvEnum.Inter.Linear)).Label;
+            var grayImage = copy.Resize(80, 80, Emgu.CV.CvEnum.Inter.Linear).Convert<Gray, byte>();
+            return faceRecognizer.Predict(grayImage.Mat).Label;
         }
-
 
     }
 }

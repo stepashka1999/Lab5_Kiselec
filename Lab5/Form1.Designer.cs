@@ -46,6 +46,8 @@
             this.videoRIOFaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.someShitFuncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openCloseAddInterfaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trainToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.readFacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Threshold_Bar = new System.Windows.Forms.TrackBar();
             this.Threshold_lbl = new System.Windows.Forms.Label();
@@ -56,6 +58,11 @@
             this.TextOfPicture_lbl = new System.Windows.Forms.Label();
             this.Lang_cb = new System.Windows.Forms.CheckBox();
             this.Play_Buton = new System.Windows.Forms.Button();
+            this.Add_button = new System.Windows.Forms.Button();
+            this.FaceIndex_lb = new System.Windows.Forms.Label();
+            this.FaceIndex_tb = new System.Windows.Forms.TextBox();
+            this.predictToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearAll_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.FirstImage_Box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SecondImage_Box)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -193,17 +200,34 @@
             // 
             this.someShitFuncToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.trainToolStripMenuItem,
-            this.readFacesToolStripMenuItem});
+            this.readFacesToolStripMenuItem,
+            this.predictToolStripMenuItem});
             this.someShitFuncToolStripMenuItem.Name = "someShitFuncToolStripMenuItem";
             this.someShitFuncToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
             this.someShitFuncToolStripMenuItem.Text = "Some Shit Func";
             // 
             // trainToolStripMenuItem
             // 
+            this.trainToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openCloseAddInterfaceToolStripMenuItem,
+            this.trainToolStripMenuItem1});
             this.trainToolStripMenuItem.Name = "trainToolStripMenuItem";
             this.trainToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.trainToolStripMenuItem.Text = "Train";
-            this.trainToolStripMenuItem.Click += new System.EventHandler(this.trainToolStripMenuItem_Click);
+            this.trainToolStripMenuItem.Text = "Train Interface";
+            // 
+            // openCloseAddInterfaceToolStripMenuItem
+            // 
+            this.openCloseAddInterfaceToolStripMenuItem.Name = "openCloseAddInterfaceToolStripMenuItem";
+            this.openCloseAddInterfaceToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.openCloseAddInterfaceToolStripMenuItem.Text = "Open/Close Add Interface";
+            this.openCloseAddInterfaceToolStripMenuItem.Click += new System.EventHandler(this.openCloseAddInterfaceToolStripMenuItem_Click);
+            // 
+            // trainToolStripMenuItem1
+            // 
+            this.trainToolStripMenuItem1.Name = "trainToolStripMenuItem1";
+            this.trainToolStripMenuItem1.Size = new System.Drawing.Size(211, 22);
+            this.trainToolStripMenuItem1.Text = "Train";
+            this.trainToolStripMenuItem1.Click += new System.EventHandler(this.trainToolStripMenuItem1_Click);
             // 
             // readFacesToolStripMenuItem
             // 
@@ -309,11 +333,62 @@
             this.Play_Buton.Visible = false;
             this.Play_Buton.Click += new System.EventHandler(this.Play_Buton_Click);
             // 
+            // Add_button
+            // 
+            this.Add_button.Location = new System.Drawing.Point(499, 51);
+            this.Add_button.Name = "Add_button";
+            this.Add_button.Size = new System.Drawing.Size(46, 23);
+            this.Add_button.TabIndex = 16;
+            this.Add_button.Text = "Add";
+            this.Add_button.UseVisualStyleBackColor = true;
+            this.Add_button.Visible = false;
+            this.Add_button.Click += new System.EventHandler(this.Add_button_Click);
+            // 
+            // FaceIndex_lb
+            // 
+            this.FaceIndex_lb.AutoSize = true;
+            this.FaceIndex_lb.Location = new System.Drawing.Point(547, 32);
+            this.FaceIndex_lb.Name = "FaceIndex_lb";
+            this.FaceIndex_lb.Size = new System.Drawing.Size(63, 13);
+            this.FaceIndex_lb.TabIndex = 17;
+            this.FaceIndex_lb.Text = "Face Index:";
+            this.FaceIndex_lb.Visible = false;
+            // 
+            // FaceIndex_tb
+            // 
+            this.FaceIndex_tb.Location = new System.Drawing.Point(551, 51);
+            this.FaceIndex_tb.Name = "FaceIndex_tb";
+            this.FaceIndex_tb.Size = new System.Drawing.Size(31, 20);
+            this.FaceIndex_tb.TabIndex = 18;
+            this.FaceIndex_tb.Visible = false;
+            // 
+            // predictToolStripMenuItem
+            // 
+            this.predictToolStripMenuItem.Name = "predictToolStripMenuItem";
+            this.predictToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.predictToolStripMenuItem.Text = "Predict";
+            this.predictToolStripMenuItem.Click += new System.EventHandler(this.predictToolStripMenuItem_Click);
+            // 
+            // ClearAll_button
+            // 
+            this.ClearAll_button.Location = new System.Drawing.Point(499, 80);
+            this.ClearAll_button.Name = "ClearAll_button";
+            this.ClearAll_button.Size = new System.Drawing.Size(111, 23);
+            this.ClearAll_button.TabIndex = 19;
+            this.ClearAll_button.Text = "Clear All";
+            this.ClearAll_button.UseVisualStyleBackColor = true;
+            this.ClearAll_button.Visible = false;
+            this.ClearAll_button.Click += new System.EventHandler(this.ClearAll_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(759, 451);
+            this.Controls.Add(this.ClearAll_button);
+            this.Controls.Add(this.FaceIndex_tb);
+            this.Controls.Add(this.FaceIndex_lb);
+            this.Controls.Add(this.Add_button);
             this.Controls.Add(this.Play_Buton);
             this.Controls.Add(this.Lang_cb);
             this.Controls.Add(this.TextOfPicture_lbl);
@@ -371,6 +446,13 @@
         private System.Windows.Forms.ToolStripMenuItem someShitFuncToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trainToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem readFacesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openCloseAddInterfaceToolStripMenuItem;
+        private System.Windows.Forms.Button Add_button;
+        private System.Windows.Forms.Label FaceIndex_lb;
+        private System.Windows.Forms.TextBox FaceIndex_tb;
+        private System.Windows.Forms.ToolStripMenuItem trainToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem predictToolStripMenuItem;
+        private System.Windows.Forms.Button ClearAll_button;
     }
 }
 
